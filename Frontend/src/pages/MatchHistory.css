@@ -1,0 +1,9 @@
+.match-history-page {
+  width: 100%;
+}
+
+.matches-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
