@@ -39,6 +39,9 @@ public class PlayerService : IPlayerService
 
     public async Task<PlayerDto> CreateAsync(PlayerCreateDto dto)
     {
+        if (await _dbContext.Players.AnyAsync(p => p.Name == dto.Name))
+            throw new InvalidOperationException("Player name must be unique");
+        
         var player = new Player
         {
             Name = dto.Name
