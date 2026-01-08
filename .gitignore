@@ -1,1 +1,9 @@
 /Project_setup.me
+
+# .NET build output
+bin/
+obj/
+
+# Environment configs
+appsettings.Development.json
+appsettings.Production.json
