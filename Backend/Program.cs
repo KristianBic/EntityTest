@@ -1,6 +1,7 @@
 using Npgsql;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data; // for AppDbContext
+using Backend.Services; 
 using Npgsql.EntityFrameworkCore.PostgreSQL; // for UseNpgsql
 
 var builder = WebApplication.CreateBuilder(args);
@@ -25,6 +26,9 @@ builder.Services.AddCors(options =>
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection"))
 );
+
+builder.Services.AddScoped<IPlayerService, PlayerService>();
+
 
 
 var app = builder.Build();
