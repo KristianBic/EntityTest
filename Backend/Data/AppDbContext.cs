@@ -14,5 +14,17 @@ namespace Backend.Data
         public DbSet<Character> Characters { get; set; }
         public DbSet<Match> Matches { get; set; }
         public DbSet<Turn> Turns { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            // Define Player-Character relationship
+            modelBuilder.Entity<Character>()
+                .HasOne(c => c.Player)
+                .WithMany(p => p.Characters)
+                .HasForeignKey(c => c.PlayerId)
+                .OnDelete(DeleteBehavior.Cascade); // or Restrict
+        }
     }
 }

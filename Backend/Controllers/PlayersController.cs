@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Backend.Data;
 using Backend.Entities;
+using Backend.DTOs;
 
 namespace Backend.Controllers;
 
@@ -88,14 +89,15 @@ public class PlayersController : ControllerBase
         {
             return BadRequest(ModelState);
         }
-        if (dto.Id != id)
-            return BadRequest("ID mismatch");
+
         var player = await _dbContext.Players.FindAsync(id);
         if (player == null)
         {
             return NotFound();
         }
+
         player.Name = dto.Name;
+
         await _dbContext.SaveChangesAsync();
 
         var result = new PlayerDto
@@ -106,7 +108,6 @@ public class PlayersController : ControllerBase
         
         return Ok(result);
     }
-
     [HttpDelete("{id}")]
     public async Task<IActionResult> DeletePlayer(int id)
     {

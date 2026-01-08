@@ -1,4 +1,7 @@
-public class PlayerUpdateDto
+namespace Backend.DTOs
 {
-    public string Name { get; set; }
+    public class PlayerUpdateDto
+    {
+        public string Name { get; set; } = string.Empty;
+    }
 }
